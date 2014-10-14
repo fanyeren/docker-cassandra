@@ -24,7 +24,9 @@ ADD dnsmasq.conf /etc/dnsmasq.conf
 ADD resolv.dnsmasq.conf /etc/resolv.dnsmasq.conf
 
 # install serfdom.io
-RUN unzip /tmp/serf.zip -d /bin
+#RUN unzip /tmp/serf.zip -d /bin
+ADD serf /bin/serf
+RUN chmod +x /bin/serf
 
 ENV SERF_CONFIG_DIR /etc/serf
 
@@ -46,4 +48,4 @@ RUN chown -R work /home/work
 
 EXPOSE 7373 7946 22 61621 7000 7001 7199 8012 9042 9160
 
-ENTRYPOINT ["/bin/bash", "/etc/serf/start-serf-agent.sh"]
+#ENTRYPOINT ["/bin/bash", "/etc/serf/start-serf-agent.sh"]

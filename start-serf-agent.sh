@@ -1,6 +1,7 @@
 #!/bin/bash
 
-service dnsmasq start
+#service dnsmasq start
+#service ssh start
 
 SERF_CONFIG_DIR=/etc/serf
 
@@ -19,4 +20,4 @@ cat > $SERF_CONFIG_DIR/node.json <<EOF
 }
 EOF
 
-/bin/serf agent -rpc-addr=127.0.0.1:7373 -bind=$(hostname -i) -event-handler=/etc/serf-events.sh -node=$(hostname -f) "$JOIN_OPTS" -config-dir $SERF_CONFIG_DIR -tag dept=im -snapshot=/home/work/opdir/serf.snapshot > /dev/null 2>&1
+/bin/serf agent -rpc-addr=127.0.0.1:7373 -bind=$(hostname -i) -event-handler=/etc/serf/event-router.sh -node=$(hostname -f) "$JOIN_OPTS" -config-dir $SERF_CONFIG_DIR -tag dept=im -snapshot=/home/work/opdir/serf.snapshot > /dev/null 2>&1

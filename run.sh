@@ -1,5 +1,7 @@
 #!/bin/bash
 
+docker stop cassandra && docker rm cassandra
+
 FIRST_IP=$(ip ad show eth0 | grep 'inet ' | awk '{print $2}' | awk -F'/' '{print $1}')
 nohup ./serf agent -rpc-addr=127.0.0.1:7373 -bind=$FIRST_IP -node=$(hostname -f) -tag dept=im -snapshot=/home/work/opdir/serf.snapshot > /dev/null 2>&1 &
 
